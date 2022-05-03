@@ -1,0 +1,37 @@
+{
+    "name": "Teensy3x_QuadEncode",
+    "version": "0.9",
+    "description": "Library for using utilizing the hardware quadrature decode on Teensy3.x",
+    "keywords": "quadrature, encoder, teensy",
+    "repository":
+    {
+      "type": "git",
+      "url": "https://github.com/bimac/Teensy3x_QuadDecode.git"
+    },
+    "examples":
+    [
+        {
+            "name": "EncoderRead",
+            "base": "examples",
+            "files": ["EncoderRead.cpp"]
+        }
+    ],
+    "authors":
+    [
+      {
+        "name": "TLB"
+      },
+      {
+        "name": "TMcGahee"
+      },
+      {
+        "name": "Florian Rau",
+        "url": "https://github.com/bimac/",
+        "maintainer": true
+      }
+    ],
+    "license": "MIT",
+    "homepage": "https://forum.pjrc.com/threads/26803-Hardware-Quadrature-Code-for-Teensy-3-x",
+    "frameworks": "Arduino",
+    "platforms": "Teensy"
+  }
