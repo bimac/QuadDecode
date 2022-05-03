@@ -4,6 +4,9 @@ Quadrature Decoder library for Teensy 3.1
 From user TLB on the Teensy Forum:
 https://forum.pjrc.com/threads/26803-Hardware-Quadrature-Code-for-Teensy-3-x
 
+This fork includes the changes made by user TMcGahee:
+https://forum.pjrc.com/threads/26803-Hardware-Quadrature-Code-for-Teensy-3-x?p=203606&viewfull=1#post203606
+
  Hardware Quadrature Code for Teensy 3.x
 
     Attached is my code for utilizing the hardware quadrature decode for Teensy3.x. As others have noted, it is not straightforward. The marketing department must have decided the applications that utilized more than 64K encoder counts or were not at least piecewise uni-directional were a small part of the market.

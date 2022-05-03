@@ -127,6 +127,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
  */
 
 // Version 0.9 October 2014
+// #pragma once
 
 #ifndef __QUADDECODE_H__
 #define __QUADDECODE_H__
@@ -139,8 +140,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. */
 enum prevInt_t{prevIntTOF, prevIntCompLow, prevIntCompHigh};
 
 template <int N> class QuadDecode;
-QuadDecode<1> *apQDcd1;	    // Pointers to  correct instance for ISR
-QuadDecode<2> *apQDcd2;
+extern QuadDecode<1> *apQDcd1;	    // Pointers to  correct instance for ISR
+extern QuadDecode<2> *apQDcd2;
 
 template <int N>    // Valid values are 1 or 2 to set up as FTM1 or FTM2
 class QuadDecode{
