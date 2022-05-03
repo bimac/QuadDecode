@@ -19,8 +19,8 @@ Quadrature Decoder library for Teensy 3.x
 > The programs attached are:
 > 
 > * ```QuadDecode.h```, ```QuadDecode_def.h``` - the important ones. Code to utilize the hardware quadrature decode channels on Teensy3.x
-> * ```main.cpp``` - an example of use. As I mentioned, it is templated, and I did not Arduinofy it, so this shows how to use the templates.
-> * ```GenEncoder.h```, ```GenEncoder.cpp``` - program that generates simulated encoder signals for debug and development.
+> * ```main.cpp``` - an example of use. As I mentioned, it is templated, and I did not Arduinofy it, so this shows how to use the templates. **(Omitted from this fork.)**
+> * ```GenEncoder.h```, ```GenEncoder.cpp``` - program that generates simulated encoder signals for debug and development. **(Omitted from this fork.)**
 > 
 > Have fun. Let me know of questions or comments.
 > 
