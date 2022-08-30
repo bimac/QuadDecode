@@ -103,7 +103,7 @@
 //   FTM1_C0SC  FTM1 Channel 0 Status and Control
 //     Set WPDIS before writing control bits
 //     Bit 7 CHF Channel Flag
-//       Channel event occured
+//       Channel event occurred
 //       Read and write 0 to clear
 //     Bit 6 CHIE Channel Interrupt Enable
 //       Set for compare interrupt
@@ -223,14 +223,26 @@ class QuadDecode {
   volatile prevInt_t v_prevInt;
   volatile uint8_t v_intStatus; // For interrupt routine debugging
 
+  bool isSetUp = false;
+  uint32_t FTM_CNT_0;
+  uint32_t FTM_MOD_0;
+  uint32_t FTM_C0SC_0;
+  uint32_t FTM_C1SC_0;
+  uint32_t FTM_SC_0;
+  uint32_t FTM_FILTER_0;
+  uint32_t FTM_CNTIN_0;
+  uint32_t FTM_COMBINE_0;
+  uint32_t FTM_C0V_0;
+  uint32_t FTM_QDCTRL_0;
+
   public:
 
   QuadDecode() {
-    // Order of contstructor execution not guaranteed,
+    // Order of constructor execution not guaranteed,
     //   start with start()
     if (N<2){    // Point to this instance for ISR
       apQDcd1 = reinterpret_cast<QuadDecode<1>*>(this);
-      // Without reintepret_cast compiler complains about unused case. Pointer
+      // Without reinterpret_cast compiler complains about unused case. Pointer
       //   for unused case not used, so don't care what it is. Used case casts
       //   to existing type.
     } else {
@@ -239,6 +251,7 @@ class QuadDecode {
   };
 
   void setup();               // Setup registers
+  void reset();               // Reset for normal operation
   void start();               // Enable interrupts, start counting
   void zeroFTM();             // Zero position counter
   void setFTM(int32_t value); // Set position counter to specific value

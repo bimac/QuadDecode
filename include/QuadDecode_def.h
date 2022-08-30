@@ -60,6 +60,18 @@ void QuadDecode<N>::setup() {
   FTM_MODE = 0x04; // Write protect disable - reset value
   FTM_MODE = 0x05; // Set FTM Enable
 
+  // Store some register values for later recovery
+  FTM_CNT_0     = FTM_CNT;
+  FTM_MOD_0     = FTM_MOD;
+  FTM_C0SC_0    = FTM_C0SC;
+  FTM_C1SC_0    = FTM_C1SC;
+  FTM_SC_0      = FTM_SC;
+  FTM_FILTER_0  = FTM_FILTER;
+  FTM_CNTIN_0   = FTM_CNTIN;
+  FTM_COMBINE_0 = FTM_COMBINE;
+  FTM_C0V_0     = FTM_C0V;
+  FTM_QDCTRL_0  = FTM_QDCTRL;
+
   // Set registers written in pins_teensy.c back to default
   FTM_CNT  = 0;
   FTM_MOD  = 0;
@@ -83,7 +95,54 @@ void QuadDecode<N>::setup() {
 
   // Write Protect Enable
   FTM_FMS = 0x40; // Write Protect, WPDIS=1
+
+  isSetUp = true;
 };
+
+// Disable interrupts, reset pins
+template <int N>
+void QuadDecode<N>::reset() {
+
+  // No need to run
+  if (!isSetUp)
+    return;
+
+  // Zero FTM counter
+  zeroFTM();
+
+  // Disable global FTMx interrupt
+  if (N < 2) // FTM1
+    NVIC_DISABLE_IRQ(IRQ_FTM1);
+  else // FTM2
+    NVIC_DISABLE_IRQ(IRQ_FTM2);
+
+  // Write Protection Disable
+  FTM_MODE = FTM_MODE_WPDIS;
+
+  // Set registers back to their original values
+  FTM_CNT     = FTM_CNT_0;
+  FTM_MOD     = FTM_MOD_0;
+  FTM_C0SC    = FTM_C0SC_0;
+  FTM_C1SC    = FTM_C1SC_0;
+  FTM_SC      = FTM_SC_0;
+  FTM_FILTER  = FTM_FILTER_0;
+  FTM_CNTIN   = FTM_CNTIN_0;
+  FTM_COMBINE = FTM_COMBINE_0;
+  FTM_C0V     = FTM_C0V_0;
+  FTM_QDCTRL  = FTM_QDCTRL_0;
+
+  // Write Protection Enable
+  FTM_FMS = FTM_FMS_WPEN;
+
+  // Setup input pins as GPIO
+  if (N < 2) {
+    PORTA_PCR12 = PORT_PCR_MUX(1);
+    PORTA_PCR13 = PORT_PCR_MUX(1);
+  } else {
+    PORTA_PCR18 = PORT_PCR_MUX(1);
+    PORTA_PCR19 = PORT_PCR_MUX(1);
+  };
+}
 
 // Enable interrupts and start counting
 template <int N>
